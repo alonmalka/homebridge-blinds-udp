@@ -102,8 +102,7 @@ BlindsUDPAccessory.prototype.setTargetPosition = function(pos, callback) {
       localThis.lastPosition += (moveUp ? 1 : -1);
       //localThis.log("last Position %s, current target position %s", localThis.lastPosition, localThis.currentTargetPosition)
 
-      if (localThis.lastPosition == localThis.currentTargetPosition) {
-        if (localThis.currentTargetPosition != 0 && localThis.currentTargetPosition != 100) {
+ 
           localThis.udpRequest(localThis.host, localThis.port, localThis.stopPayload, function() {
               localThis.log("Success stop moving %s", (moveUp ? "up (to "+pos+")" : "down (to "+pos+")"))
               localThis.service
@@ -113,8 +112,8 @@ BlindsUDPAccessory.prototype.setTargetPosition = function(pos, callback) {
                   localThis.lastPosition = pos;
 
 
-                }.bind(localThis));
-        }
+                .bind(localThis));
+   
         clearInterval(localThis.interval);
       }
     }, parseInt(this.motionTime) / 100);
